@@ -10,6 +10,9 @@ import matplotlib.pyplot as plt
 
 import bokeh.palettes as bp
 
+# For running in codespaces bokeh serve --show Jan08.py 
+# --allow-websocket-origin=agrbishal-fictional-telegram-666wq7r7q7vfr5xp-5006.preview.app.github.dev
+
 df_tsne = pd.read_csv('tsne_group_data.csv', index_col=0)
 df_tsne.columns = ['tsne_coor0', 'tsne_coor1', 'stay_id', 'group']
 
@@ -96,8 +99,6 @@ def callback_multisource_heart(subject_ids):
         res_df = df1.append(df2)
 
         p = figure(title="Crystalloids input on HR plot for SubjectIDs in ICU", 
-        plot_width=600, 
-        plot_height=400,
         x_axis_label='deltas',
         y_axis_label='heart_rate', width=1400, aspect_scale=5, tooltips=TOOLTIPS_HEART, tools=["tap", "box_select"])
         source_heart = ColumnDataSource(data=res_df)
@@ -212,8 +213,6 @@ color_dict_tsne = {df_tsne['group'].unique()[i]: group_colors[i] for i in range(
 df_tsne['group_color'] = df_tsne['group'].apply(color_dict_tsne.get)
 
 p_tsne = figure(title="T-SNE and group plot", 
-plot_width=800, 
-plot_height=400,
 x_axis_label='tsne_coor0',
 y_axis_label='tsne_coor1', aspect_scale=5, tooltips=TOOLTIPS_TSNE, tools=["tap", "box_select"])
 
@@ -230,8 +229,6 @@ multi_choice = MultiChoice(value=OPTIONS, options=OPTIONS)
 multi_choice.on_change('value', multi_choice_callback)
 
 p = figure(title="Crystalloids input on HR plot for SubjectIDs in ICU", 
-plot_width=600, 
-plot_height=400,
 x_axis_label='deltas',
 y_axis_label='heart_rate', width=1400, aspect_scale=5, tooltips=TOOLTIPS_HEART, tools=["tap", "box_select"])
 
